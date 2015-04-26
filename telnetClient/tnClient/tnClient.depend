@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1430071398 source:/home/frassam/Documents/Experiment/telnetClient/tnClient/client.cpp
+	<iostream>
+	<sys/socket.h>
+	<assert.h>
+	<arpa/inet.h>
+	<errno.h>
+	<sys/ioctl.h>
+	<stdlib.h>
+	<string.h>
+
