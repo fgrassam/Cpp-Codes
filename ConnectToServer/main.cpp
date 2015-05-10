@@ -17,7 +17,7 @@ int main()
     std::string params[4];
     std::ifstream paramsFile ("/home/frassam/Documents/params.txt");
     /* File Structure is:
-    Line 1 : SMTP server address
+    Line 1 : Server address
     Line 2 : Port number
     Line 3 : Username
     Line 4 : Password
