@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1431292587 source:/home/frassam/Documents/GitRepo/Cpp-Codes/ConnectToServer/main.cpp
+	<iostream>
+	<sys/socket.h>
+	<fstream>
+	<string>
+	<cstring>
+	<netdb.h>
+	<unistd.h>
+	<stdlib.h>
+	<sys/time.h>
+	<assert.h>
+

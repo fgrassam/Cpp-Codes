@@ -6,12 +6,14 @@
 #include <netdb.h>      // gethostbyname
 #include <unistd.h>     // Close file discriptors // socketfd
 #include <stdlib.h>
+#include <sys/time.h>   // for timeval
+#include <assert.h>
 
 void error(const char *msg);
 
 int main()
 {
-    int n_sockfd, n_addinf, n_connect;
+    int n_sockfd, n_addinf, n_connect, n_sockopt;
     struct addrinfo add_hints;
     struct addrinfo *add_results, *rp;
     std::string params[4];
@@ -23,13 +25,18 @@ int main()
     Line 4 : Password
     */
 
+    struct timeval sockTimeout;
+    sockTimeout.tv_sec = 5;
+    sockTimeout.tv_usec = 0;
+
     if (paramsFile.is_open())
     {
         for (int i=0; i<4; i++)
         {
             if (not std::getline(paramsFile,params[i]))
             {
-                std::string errString = "Could not read parameter " + std::to_string(i) + '\n';
+                //std::string errString = "Could not read parameter " + std::to_string(i) + '\n';
+                std::string errString = "Could not read parameter \n";
                 const char * c = errString.c_str();
                 error(c);
                 exit(0);
@@ -68,6 +75,9 @@ int main()
             std::cout << "Unable to open socket\n";
             continue;
         }
+        n_sockopt = setsockopt(n_sockfd, SOL_SOCKET, SO_SNDTIMEO, (char *)&sockTimeout, sizeof(timeval));
+        assert (n_sockopt>=0);
+
         std::cout << "Connecting...\n";
         n_connect = connect(n_sockfd,
                     rp->ai_addr,
